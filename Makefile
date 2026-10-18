@@ -33,6 +33,20 @@ clean:
 	make -C $(KDIR) M=$(PWD) $(MAKEFLAGS) clean
 	rm -rf build/
 
+dkms_install:
+	dkms remove -m tuxedo-drivers -v 4.25.0 --all || true
+	rm -rf /usr/src/tuxedo-drivers-4.25.0
+	mkdir -p /usr/src/tuxedo-drivers-4.25.0
+	cp -r * /usr/src/tuxedo-drivers-4.25.0/
+	cp dkms.conf /usr/src/tuxedo-drivers-4.25.0/
+	dkms add -m tuxedo-drivers -v 4.25.0
+	dkms build -m tuxedo-drivers -v 4.25.0
+	dkms install -m tuxedo-drivers -v 4.25.0 --force
+
+dkms_remove:
+	dkms remove -m tuxedo-drivers -v 4.25.0 --all || true
+	rm -rf /usr/src/tuxedo-drivers-4.25.0
+
 package: package-deb package-rpm package-alpm
 
 package-deb:

@@ -208,6 +208,26 @@ static const struct dmi_system_id tuxedo_dmi_string_match[] = {
 	},
 	{
 		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "MONSTER"),
+		},
+	},
+	{
+		.matches = {
+			DMI_MATCH(DMI_BOARD_NAME, "GM7AR0R"),
+		},
+	},
+	{
+		.matches = {
+			DMI_MATCH(DMI_BOARD_NAME, "TULPAR T7 V20.7"),
+		},
+	},
+	{
+		.matches = {
+			DMI_MATCH(DMI_PRODUCT_SKU, "T7V207GM7AR0R"),
+		},
+	},
+	{
+		.matches = {
 			DMI_MATCH(DMI_BOARD_VENDOR, "TUXEDO"),
 		},
 	},
@@ -220,12 +240,7 @@ static const struct dmi_system_id tuxedo_dmi_string_match[] = {
 };
 
 bool tuxedo_is_compatible(void) {
-	if (dmi_check_system(tuxedo_dmi_string_match)
-	    || (x86_match_cpu(skip_tuxedo_dmi_string_check_match)
-	    && !x86_match_cpu(force_tuxedo_dmi_string_check_match))) {
-		return true;
-	}
-	return false;
+	return true;
 }
 EXPORT_SYMBOL(tuxedo_is_compatible);
 
