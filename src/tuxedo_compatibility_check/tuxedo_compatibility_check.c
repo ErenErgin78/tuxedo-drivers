@@ -240,7 +240,12 @@ static const struct dmi_system_id tuxedo_dmi_string_match[] = {
 };
 
 bool tuxedo_is_compatible(void) {
-	return true;
+	if (dmi_check_system(tuxedo_dmi_string_match)
+	    || (x86_match_cpu(skip_tuxedo_dmi_string_check_match)
+	    && !x86_match_cpu(force_tuxedo_dmi_string_check_match))) {
+		return true;
+	}
+	return false;
 }
 EXPORT_SYMBOL(tuxedo_is_compatible);
 
