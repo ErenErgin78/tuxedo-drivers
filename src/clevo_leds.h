@@ -76,6 +76,9 @@ static bool leds_initialized = false;
  */
 static void color_scaling(enum clevo_kb_backlight_types *type, u8 *red, u8 *green, u8 *blue)
 {
+	if (dmi_string_in(DMI_SYS_VENDOR, "MONSTER") || dmi_string_in(DMI_BOARD_NAME, "TULPAR"))
+		return;
+
 	if (*type == CLEVO_KB_BACKLIGHT_TYPE_1_ZONE_RGB) {
 		*red = (180 * *red) / 255;
 		*blue = (200 * *blue) / 255;
